@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6225236195522875940}
   - component: {fileID: 5326712053804636604}
   - component: {fileID: 9122724236812704286}
+  - component: {fileID: -3901532315211797566}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 342024963339310139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,7 +121,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba55568fd8ba98d4cb7321cb82fecfb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 10
   mainObjectPrefab: {fileID: 4405685359045676742, guid: c6dde6866fbb3e34285f55502f490de5, type: 3}
   cornerObjectPrefab: {fileID: 6063346459682061324, guid: 5dee709c3178e6f4c89c4ea822c2d0d5, type: 3}
-  pipeColor: {r: 0, g: 0, b: 0, a: 0}
+  pipePrefab: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
+--- !u!65 &-3901532315211797566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342024963339310139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

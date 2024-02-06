@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RandomMovement : MonoBehaviour
 {
@@ -6,21 +8,28 @@ public class RandomMovement : MonoBehaviour
     private float rotationAngle = 90f; // Rotation angle in degrees
 
     private float rotationTimer = 0f; // Timer to track the time elapsed since the last rotation
-
+    //private Pipe pipe;
+    
     [SerializeField] private GameObject mainObjectPrefab;
     [SerializeField] private GameObject cornerObjectPrefab;
-    [SerializeField] private Color pipeColor;
+    private Color pipeColor;
+    [SerializeField] private GameObject pipePrefab;
 
     private float objectLengthY; // Length of the object in the y-axis
     private Vector3 previousPosition; // Previous position of the object
     private bool mainObjectInstantiated = false; // Flag to track if the mainObject is instantiated
     private bool isMoving = true; // Flag to indicate if the object is moving
+    private bool hasCollided = false;
 
     private void Start()
     {
         // Get the length of the object in the y-axis
         objectLengthY = mainObjectPrefab.GetComponent<Renderer>().bounds.size.y;
         previousPosition = transform.position; // Store the initial position of the object
+        pipeColor = pipePrefab.GetComponent<Pipe>().SetColor();
+        gameObject.GetComponent<Renderer>().material.color = pipeColor;
+        //cornerObjectPrefab.GetComponent<Renderer>().material.color = pipePrefab.GetComponent<Pipe>().SetColor();
+
     }
 
     private void Update()
@@ -30,18 +39,19 @@ public class RandomMovement : MonoBehaviour
             // Move the object forward towards the y-axis
             transform.Translate(Vector3.up * speed * Time.deltaTime);
 
+            InstantiateMainObject();
+
             // Update the rotation timer
             rotationTimer += Time.deltaTime;
 
             // Check if it's time to rotate the object
-            if (rotationTimer >= Random.Range(1, 4))
+            if (rotationTimer >= Random.Range(0.5f, 1.5f))
             {
                 Rotate();
-                Instantiate(cornerObjectPrefab, transform.position, transform.rotation);
+                GameObject cornerObject =  Instantiate(cornerObjectPrefab, transform.position, transform.rotation);
+                cornerObject.GetComponent<Renderer>().material.color = pipeColor;
                 rotationTimer = 0f;
             }
-
-            InstantiateMainObject();
         }
     }
 
@@ -49,7 +59,9 @@ public class RandomMovement : MonoBehaviour
     {
         // Check if the main object has not been instantiated and if the position exceeds its length
         if (!mainObjectInstantiated &&
-            (transform.position - previousPosition).magnitude >= objectLengthY)
+            (Mathf.Abs(transform.position.x - previousPosition.x) >= objectLengthY*0.8 ||
+             Mathf.Abs(transform.position.y - previousPosition.y) >= objectLengthY*0.8 ||
+             Mathf.Abs(transform.position.z - previousPosition.z) >= objectLengthY*0.8))
         {
             // Instantiate the main object
             GameObject mainObject = Instantiate(mainObjectPrefab, transform.position, transform.rotation);
@@ -57,14 +69,34 @@ public class RandomMovement : MonoBehaviour
             // Set the color/material of the main object to match the pipe color
             mainObject.GetComponent<Renderer>().material.color = pipeColor;
 
-            // Make the main object a child of the pipe
-            mainObject.transform.parent = transform;
-
             // Set the flag to true
             mainObjectInstantiated = true;
 
             // Reset the previous position
             previousPosition = transform.position;
+        }
+        else if (mainObjectInstantiated &&
+                 (Mathf.Abs(transform.position.x - previousPosition.x) < objectLengthY*0.8 &&
+                  Mathf.Abs(transform.position.y - previousPosition.y) < objectLengthY*0.8 &&
+                  Mathf.Abs(transform.position.z - previousPosition.z) < objectLengthY*0.8))
+        {
+            // If the position is within the length, reset the flag
+            mainObjectInstantiated = false;
+        }
+    }
+
+
+    private void OnCollisionEnter()
+    {
+        if (!hasCollided)
+        {
+            // Set the flag to true to indicate that the collision has been handled
+            hasCollided = true;
+            // Stop the movement of the collided pipe
+            StopMovement();
+            // Spawn a new pipe at a random position
+            pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
+            Debug.Log("collided");
         }
     }
 
@@ -73,6 +105,7 @@ public class RandomMovement : MonoBehaviour
         // Get random rotation angle
         rotationAngle = ChangeRotationAngle();
         transform.Rotate(Vector3.forward, rotationAngle);
+        transform.Rotate(Vector3.right, rotationAngle);
     }
 
     // Method to randomly select either -90 or 90 degrees

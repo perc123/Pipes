@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,7 @@ public class RandomMovement : MonoBehaviour
     private bool _mainObjectInstantiated;
     private bool _isMoving = true; 
     private bool _hasCollided;
+    private bool _startRotation = true;
 
     private void Start()
     {
@@ -31,8 +33,15 @@ public class RandomMovement : MonoBehaviour
     {
         if (_isMoving)
         {
+            float randomDirection = Random.Range(0f, 1f);
+            Vector3 movementDirection = randomDirection < 0.5f ? Vector3.up : Vector3.down;
+            
+            // Move the object in the determined direction with the specified speed
+            transform.Translate(movementDirection * (speed * Time.deltaTime));
+
             // Move the object forward towards the y-axis
-            transform.Translate(Vector3.up * (speed * Time.deltaTime));
+            //transform.Translate(Vector3.up * (speed * Time.deltaTime));
+            //StartingRotation();
 
             InstantiateMainObject();
 
@@ -47,6 +56,7 @@ public class RandomMovement : MonoBehaviour
             }
         }
     }
+    
 
     private void InstantiateMainObject()
     {
@@ -87,7 +97,6 @@ public class RandomMovement : MonoBehaviour
             pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
         }
     }
-
     private void Rotate()
     {
         _rotationAngle = ChangeRotationAngle();
@@ -118,6 +127,68 @@ public class RandomMovement : MonoBehaviour
     }
     
     
+    //TODO: Random movement towards all axis
+    private Vector3 GetRandomDirection()
+    {
+        // Generate random values for each component of the direction vector
+        float x = Random.Range(-1f, 1f);
+        float y = Random.Range(-1f, 1f);
+        float z = Random.Range(-1f, 1f);
+
+        // Normalize the vector to ensure constant speed
+        Vector3 direction = new Vector3(x, y, z).normalized;
+
+        return direction;
+    }
+
+    private Vector3 StartPosition()
+    {
+        int randomNumber = Random.Range(0, 2);
+        Vector3 startPosition = new Vector3();
+        switch (randomNumber)
+        {
+            case 0:
+                startPosition = Vector3.down;
+                break;
+            case 1:
+                startPosition = Vector3.up;
+                break;
+            case 2:
+                startPosition = Vector3.right * (speed * Time.deltaTime);
+                break;
+        }
+
+        return startPosition;
+    }
+    private void StartingRotation()
+    {
+        int randomNumber = Random.Range(0, 6);
+        _rotationAngle = ChangeRotationAngle();
+        
+        switch (randomNumber)
+        {
+            case 0:
+                transform.Rotate(Vector3.right, _rotationAngle);
+                break;
+            case 1:
+                transform.Rotate(Vector3.left, _rotationAngle);
+                break;
+            case 2:
+                transform.Rotate(Vector3.right, _rotationAngle);
+                break;
+            case 3:
+                transform.Rotate(Vector3.left, _rotationAngle);
+                break;
+            case 4:
+                transform.Rotate(Vector3.forward, _rotationAngle);
+                break;
+            case 5:
+                transform.Rotate(Vector3.back, _rotationAngle);
+                break;
+        }
+
+        _startRotation = false;
+    }
     // TODO: - Half-size prefab to smoothen corner connections
     void EndingPrefab(Vector3 position, Quaternion rotation)
     {

@@ -6,7 +6,7 @@ public class Collision : MonoBehaviour
 {
     [SerializeField] private GameObject pipePrefab;
     [SerializeField] private GameObject headPrehab;
-    private bool _hasCollided;
+    private bool _hasCollided; // Ensures only one collision
     private RandomMovement _randomMovement;
     private void OnCollisionEnter()
     {

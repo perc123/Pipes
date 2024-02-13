@@ -48,7 +48,6 @@
      <Compile Include="Assets\Scripts\Pipe.cs" />
      <Compile Include="Assets\Scripts\Collision.cs" />
      <Compile Include="Assets\Scripts\RendomMovement.cs" />
-     <Compile Include="Assets\Scripts\PrefabManager.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Materials" />
      <Folder Include="Assets\Scenes" />

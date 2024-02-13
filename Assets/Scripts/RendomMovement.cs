@@ -21,7 +21,6 @@ public class RandomMovement : MonoBehaviour
     private Vector3 _previousPosition; 
     private bool _mainObjectInstantiated;
     private bool _isMoving = true; 
-    //private bool _hasCollided;
     
 
     private void Start()
@@ -82,35 +81,6 @@ public class RandomMovement : MonoBehaviour
             _mainObjectInstantiated = false;
         }
     }
-    /*void CheckApproachingPositions()
-    {
-        foreach (Vector3 prefabPosition in prefabManager.GetComponent<PrefabManager>().prefabPositions)
-        {
-            float distance = Mathf.Abs(transform.position.x - prefabPosition.y);
-            if (distance < detectionRadius)
-            {
-                HandleApproachingPosition();
-                Debug.Log("Detected");
-                break; // Exit loop if a position is detected
-            }
-        }
-    }
-    void HandleApproachingPosition()
-    {
-        // Call your collision method here
-        Rotate();
-    }
-    private void OnCollisionEnter()
-    {
-        if (!_hasCollided)
-        {
-            // Indicate that the collision has been handled - ensure one collision per frame
-            _hasCollided = true;
-            StopMovement();
-            // Spawn a new pipe at a random position
-            pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
-        }
-    }*/
 
     private void Rotate()
     {

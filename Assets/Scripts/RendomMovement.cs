@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,18 +8,21 @@ public class RandomMovement : MonoBehaviour
 {
     public float speed = 10f; 
     private float _rotationAngle = 90f; 
-    private float _rotationTimer; 
+    private float _rotationTimer;
+
     
     [SerializeField] private GameObject mainObjectPrefab;
     [SerializeField] private GameObject cornerObjectPrefab;
     private Color _pipeColor;
     [SerializeField] private GameObject pipePrefab;
 
+
     private float _objectLengthY; // Length of the object in the y-axis - Body
     private Vector3 _previousPosition; 
     private bool _mainObjectInstantiated;
     private bool _isMoving = true; 
-    private bool _hasCollided;
+    //private bool _hasCollided;
+    
 
     private void Start()
     {
@@ -44,7 +50,9 @@ public class RandomMovement : MonoBehaviour
                 GameObject cornerObject =  Instantiate(cornerObjectPrefab, transform.position, transform.rotation);
                 cornerObject.GetComponent<Renderer>().material.color = _pipeColor;
                 _rotationTimer = 0f;
+
             }
+
         }
     }
 
@@ -57,7 +65,7 @@ public class RandomMovement : MonoBehaviour
         {
             // Instantiate the main object - body
             GameObject mainObject = Instantiate(mainObjectPrefab, transform.position, transform.rotation);
-
+            Vector3 position = mainObject.transform.position;
             // Set the color
             mainObject.GetComponent<Renderer>().material.color = _pipeColor;
 
@@ -74,8 +82,24 @@ public class RandomMovement : MonoBehaviour
             _mainObjectInstantiated = false;
         }
     }
-
-
+    /*void CheckApproachingPositions()
+    {
+        foreach (Vector3 prefabPosition in prefabManager.GetComponent<PrefabManager>().prefabPositions)
+        {
+            float distance = Mathf.Abs(transform.position.x - prefabPosition.y);
+            if (distance < detectionRadius)
+            {
+                HandleApproachingPosition();
+                Debug.Log("Detected");
+                break; // Exit loop if a position is detected
+            }
+        }
+    }
+    void HandleApproachingPosition()
+    {
+        // Call your collision method here
+        Rotate();
+    }
     private void OnCollisionEnter()
     {
         if (!_hasCollided)
@@ -86,13 +110,14 @@ public class RandomMovement : MonoBehaviour
             // Spawn a new pipe at a random position
             pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
         }
-    }
+    }*/
 
     private void Rotate()
     {
         _rotationAngle = ChangeRotationAngle();
         transform.Rotate(Vector3.forward, _rotationAngle);
         transform.Rotate(Vector3.right, _rotationAngle);
+         // When a rotation has happened the PrefabManager is informed
     }
 
     private float ChangeRotationAngle()

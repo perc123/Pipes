@@ -1165,6 +1165,10 @@ PrefabInstance:
       value: Pipe
       objectReference: {fileID: 0}
     - target: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

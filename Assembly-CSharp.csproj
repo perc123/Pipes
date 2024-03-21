@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Collision.cs" />
      <Compile Include="Assets\Scripts\RendomMovement.cs" />
      <Folder Include="Assets" />
+     <Folder Include="Assets\Preview" />
      <Folder Include="Assets\Materials" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Prefabs" />

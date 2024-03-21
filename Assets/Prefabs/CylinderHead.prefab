@@ -123,9 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  detectionRadius: 0.001
   mainObjectPrefab: {fileID: 4405685359045676742, guid: c6dde6866fbb3e34285f55502f490de5, type: 3}
+  mainObjectHalfPrefab: {fileID: 4405685359045676742, guid: c125ad37918b4f547a53747ba1ead7c8, type: 3}
   cornerObjectPrefab: {fileID: 6063346459682061324, guid: 5dee709c3178e6f4c89c4ea822c2d0d5, type: 3}
+  cornerObjectPrefab2: {fileID: 4405685359045676742, guid: c125ad37918b4f547a53747ba1ead7c8, type: 3}
   pipePrefab: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
 --- !u!65 &2386152184797790218
 BoxCollider:

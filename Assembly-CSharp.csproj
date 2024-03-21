@@ -51,6 +51,7 @@
      <Folder Include="Assets" />
      <Folder Include="Assets\Materials" />
      <Folder Include="Assets\Scenes" />
+     <Folder Include="Assets\Preview" />
      <Folder Include="Assets\Prefabs" />
      <Folder Include="Assets\Scripts" />
      <Reference Include="UnityEngine">

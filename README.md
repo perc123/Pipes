@@ -2,7 +2,7 @@
 # Imitating Windows 95 Pipes Screensaver in Unity
 
 
-!(/Assets/Preview/pipes.gif)
+![Pipes](/Assets/Preview/pipes.gif)
 
 This project is an imitation of the Windows 95 Pipes Screensaver in Unity 3D. 
 The intention is to implement the basic functionality of the screensaver including:

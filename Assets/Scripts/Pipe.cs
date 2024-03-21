@@ -13,7 +13,7 @@ public class Pipe : MonoBehaviour
     public void SpawnNewPipe()
     {
         // Randomly generate a position for the new pipe
-        Vector3 newPosition = new Vector3(Random.Range(-15f, 15f), Random.Range(-15f, 15f), Random.Range(-15f, 15f));
+        Vector3 newPosition = new Vector3(Random.Range(-10f, 15f), Random.Range(-13f, 10f), Random.Range(-10f, 25f));
         
         GameObject newPipe = Instantiate(pipePrefab, newPosition, Quaternion.identity);
         

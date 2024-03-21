@@ -37,12 +37,13 @@ public class RandomMovement : MonoBehaviour
             // Move the object forward towards the y-axis
             transform.Translate(Vector3.up * (speed * Time.deltaTime));
 
-            InstantiateMainObject();
 
             _rotationTimer += Time.deltaTime;
 
             if (_rotationTimer >= Random.Range(0.5f, 1.5f))
             {
+                _mainObjectInstantiated = true;
+
                 Rotate();
                 GameObject cornerObject = Instantiate(cornerObjectPrefab, transform.position, transform.rotation);
                 GameObject childObject = Instantiate(cornerObjectPrefab2, transform.position, transform.rotation);
@@ -51,15 +52,19 @@ public class RandomMovement : MonoBehaviour
                 SetChildObjectColor(childObject, _pipeColor);
                 _rotationTimer = 0f;
             }
+            
+                InstantiateMainObject();
+                
+
         }
     }
 
     private void InstantiateMainObject()
     {
         if (!_mainObjectInstantiated &&
-            (Mathf.Abs(transform.position.x - _previousPosition.x) >= _objectLengthY * 0.8 ||
-             Mathf.Abs(transform.position.y - _previousPosition.y) >= _objectLengthY * 0.8 ||
-             Mathf.Abs(transform.position.z - _previousPosition.z) >= _objectLengthY * 0.8))
+            (Mathf.Abs(transform.position.x - _previousPosition.x) >= _objectLengthY * 0.6 ||
+             Mathf.Abs(transform.position.y - _previousPosition.y) >= _objectLengthY * 0.6 ||
+             Mathf.Abs(transform.position.z - _previousPosition.z) >= _objectLengthY * 0.6))
         {
             // Instantiate the main object - body
             GameObject mainObject = Instantiate(mainObjectPrefab, transform.position, transform.rotation);
@@ -72,9 +77,9 @@ public class RandomMovement : MonoBehaviour
             _previousPosition = transform.position;
         }
         else if (_mainObjectInstantiated &&
-                 (Mathf.Abs(transform.position.x - _previousPosition.x) < _objectLengthY * 0.8 &&
-                  Mathf.Abs(transform.position.y - _previousPosition.y) < _objectLengthY * 0.8 &&
-                  Mathf.Abs(transform.position.z - _previousPosition.z) < _objectLengthY * 0.8))
+                 (Mathf.Abs(transform.position.x - _previousPosition.x) < _objectLengthY * 0.6 &&
+                  Mathf.Abs(transform.position.y - _previousPosition.y) < _objectLengthY * 0.6 &&
+                  Mathf.Abs(transform.position.z - _previousPosition.z) < _objectLengthY * 0.6))
         {
             _mainObjectInstantiated = false;
         }

@@ -23,7 +23,7 @@ public class Pipe : MonoBehaviour
         Debug.Log(_color);
     }
 
-    public Color SetColor()
+    public Color GetColor()
     {
         return _color;
     }

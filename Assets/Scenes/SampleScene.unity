@@ -1160,6 +1160,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2333954480389283390, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
+      propertyPath: pipePrefab
+      value: 
+      objectReference: {fileID: 6699843595721161532, guid: 25562f57beaf47f419f8e20818ac623b, type: 3}
+    - target: {fileID: 2333954480389283390, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
+      propertyPath: sphereBegin
+      value: 
+      objectReference: {fileID: 6225031795572908935, guid: 23c56f8bfc04a20488f95e477b609d68, type: 3}
+    - target: {fileID: 2726355481224817975, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
       propertyPath: m_Name
       value: Pipe
@@ -1213,7 +1225,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2726355481224817975, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}

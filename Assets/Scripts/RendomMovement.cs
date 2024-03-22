@@ -37,26 +37,26 @@ public class RandomMovement : MonoBehaviour
             // Move the object forward towards the y-axis
             transform.Translate(Vector3.up * (speed * Time.deltaTime));
 
-            InstantiateMainObject();
 
-            _rotationTimer += Time.deltaTime;
+            _rotationTimer += Time.deltaTime * 10;
+            
 
-            if (_rotationTimer >= Random.Range(0.5f, 1.5f))
+
+            if (_rotationTimer % 5 >= Random.Range(3, 5))
             {
-
                 Rotate();
                 GameObject cornerObject = Instantiate(cornerObjectPrefab, transform.position, transform.rotation);
                 GameObject childObject = Instantiate(cornerObjectPrefab2, transform.position, transform.rotation);
 
                 cornerObject.GetComponent<Renderer>().material.color = _pipeColor;
                 SetChildObjectColor(childObject, _pipeColor);
-                _rotationTimer = 0f;
+                _rotationTimer = 0;
             }
-            
-                
+            InstantiateMainObject();
 
         }
     }
+
 
     private void InstantiateMainObject()
     {

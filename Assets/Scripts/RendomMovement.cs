@@ -89,7 +89,7 @@ public class RandomMovement : MonoBehaviour
         }
     }
 
-    private void Rotate()
+    public void Rotate()
     {
         _rotationAngle = ChangeRotationAngle();
         transform.Rotate(Vector3.forward, _rotationAngle);

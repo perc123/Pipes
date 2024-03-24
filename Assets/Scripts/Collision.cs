@@ -8,6 +8,7 @@ public class Collision : MonoBehaviour
     [SerializeField] private GameObject headPrehab;
     private bool _hasCollided; // Ensures only one collision
     private RandomMovement _randomMovement;
+    
     private void OnCollisionEnter(UnityEngine.Collision other)
     {
         if (!_hasCollided)
@@ -24,6 +25,8 @@ public class Collision : MonoBehaviour
             {
                 headPrehab.GetComponent<RandomMovement>().Rotate();
                 _hasCollided = true;
+                Debug.Log("collision");
+
             }
 
         }

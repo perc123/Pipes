@@ -23,15 +23,12 @@ of the pipe.
 Finally the **sphere prefab** is a transparent sphere in front of the head prefab handling
 all the collision. That way the visible pipe seems to handle collisions smoothly.
 
-## Handling collisions
+## Handling collisions and movement
 
-The collision handling is happening with the OnCollisionEnter method in the Collision script
-and it can be applied to all game objects (including borders) that are not labeled as UI layer. 
-That is so, in order to achieve collisions only with the desired game objects. 
-
-#### TODOs
-When a pipe is rotating in order to change direction, a corner object -sphere- is spawned.
-However, in order to achieve a smoother corner representation, the method EndingPrefab in 
-RandomMovement is instantiating a cylinder half the length of the **body prefab**. 
-This method is still to be implemented, as it requires different handling in each axis
-as the rotation of the **head prefab** changes in the 3D space.
+The head of the pipe can collide with all objects that are not labeled as UI layer;
+that is so, in order to achieve collisions only with the desired game objects. If the
+head collides with a body part or with the borders, then it should rotate to another 
+available direction. If there is no direction available, then it should 4stop its movement 
+and a new pipe with a new random color is instantiated. The prediction if there is a spot
+available for the pipe head to rotate / move is achieved with the Physics.Raycast function
+which predicts collisions. 

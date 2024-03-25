@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\Pipe.cs" />
      <Compile Include="Assets\Scripts\Collision.cs" />
      <Compile Include="Assets\Scripts\RendomMovement.cs" />
+     <Compile Include="Assets\Scripts\GridManager.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Preview" />
      <Folder Include="Assets\Materials" />

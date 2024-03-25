@@ -1,34 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
+    [SerializeField] private GameObject borders;
     [SerializeField] private GameObject pipePrefab;
     [SerializeField] private GameObject headPrehab;
-    private bool _hasCollided; // Ensures only one collision
+    private bool _hasCollided;    // Ensures only one collision
     private RandomMovement _randomMovement;
-    
-    private void OnCollisionEnter(UnityEngine.Collision other)
+    private CollisionBorders CollisionBorders;
+
+    private void Update()
     {
+        _hasCollided = false;
+    }
+
+    private void OnCollisionEnter(UnityEngine.Collision collision)
+    {
+        
         if (!_hasCollided)
         {
-            if (other.gameObject.CompareTag("Borders"))
+            if (collision.gameObject.layer == 3)
             {
                 headPrehab.GetComponent<RandomMovement>().StopMovement();
                 // Spawn a new pipe at a random position
                 pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
-                _hasCollided = true;
                 Debug.Log("Border collision");
             }
             else
-            {
+            { 
                 headPrehab.GetComponent<RandomMovement>().Rotate();
-                _hasCollided = true;
                 Debug.Log("collision");
-
             }
-
+            _hasCollided = true;
         }
     }
 }

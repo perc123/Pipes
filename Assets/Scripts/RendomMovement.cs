@@ -43,7 +43,7 @@ public class RandomMovement : MonoBehaviour
             {
                 // Rotate to find a free direction
                 RotateToFreeDirection();
-                Debug.Log("Obstacle in frond");
+                Debug.Log("Obstacle in front");
 
             }
             else

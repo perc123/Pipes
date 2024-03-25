@@ -47,7 +47,7 @@ public class RandomMovement : MonoBehaviour
             
 
 
-            if (_rotationTimer % 5 >= Random.Range(3, 6))
+            if (_rotationTimer % 10 >= Random.Range(6, 11))
             {
                 Rotate();
                 GameObject cornerObject = Instantiate(cornerObjectPrefab, transform.position, transform.rotation);

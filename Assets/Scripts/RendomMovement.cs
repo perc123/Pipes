@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class RandomMovement : MonoBehaviour
 {
     public float speed = 10f; 
     private float _rotationAngle = 90f; 
     private float _rotationTimer;
+    public float raycastDistance = 1f;
 
     [SerializeField] private GameObject mainObjectPrefab;
     [SerializeField] private GameObject cornerObjectPrefab;
@@ -42,10 +39,20 @@ public class RandomMovement : MonoBehaviour
             // Move the object forward towards the y-axis
             transform.Translate(Vector3.up * (speed * Time.deltaTime));
 
+            if (CheckObstacleInFront())
+            {
+                // Rotate to find a free direction
+                RotateToFreeDirection();
+                Debug.Log("Obstacle in frond");
 
-            _rotationTimer += Time.deltaTime * 10;
+            }
+            else
+            {
+                // Continue moving if no obstacles
+                _isMoving = true;
+            }
             
-
+            _rotationTimer += Time.deltaTime * 10;
 
             if (_rotationTimer % 10 >= Random.Range(6, 11))
             {
@@ -127,4 +134,52 @@ public class RandomMovement : MonoBehaviour
     {
         _isMoving = false;
     }
+    
+    private bool CheckObstacleInFront()
+    {
+        // Cast a ray in the forward direction of the object
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.up, out hit, raycastDistance))
+        {
+            // If the ray hits something, check if it's an obstacle
+            if (hit.collider != null && hit.collider.tag == "Obstacle")
+            {
+                // Obstacle detected
+                return true;
+            }
+        }
+        // No obstacle detected
+        return false;
+    }
+
+    private void RotateToFreeDirection()
+    {
+        bool freeDirectionFound = false;
+        for (int i = 0; i < 4; i++)
+        {
+            Rotate();
+            // Check if there is no obstacle in the new direction
+            if (!CheckObstacleInFront())
+            {
+                // Free direction found, break the loop
+                freeDirectionFound = true;
+                break;
+            }
+        }
+
+        if (!freeDirectionFound)
+        {
+            // No free direction found, stop movement
+            _isMoving = false;
+            Debug.Log("No free direction found, stopping movement.");
+            pipePrefab.GetComponent<Pipe>().SpawnNewPipe();
+
+        }
+        else
+        {
+            // Free direction found, continue moving
+            _isMoving = true;
+        }
+    }
+
 }

@@ -127,6 +127,7 @@ MonoBehaviour:
   cornerObjectPrefab: {fileID: 6063346459682061324, guid: 5dee709c3178e6f4c89c4ea822c2d0d5, type: 3}
   cornerObjectPrefab2: {fileID: 7357836744169686378, guid: f2296f0d6ccfcad418ed46f2b68118ec, type: 3}
   sphereBegin: {fileID: 6225031795572908935, guid: 23c56f8bfc04a20488f95e477b609d68, type: 3}
+  gridManager: {fileID: 2317438484484562057, guid: ff3d2b913dcce724799b6e5a04b92e79, type: 3}
   pipePrefab: {fileID: 4856032481251390250, guid: 280793fa329795c459f7a2c2612b54e5, type: 3}
 --- !u!65 &2386152184797790218
 BoxCollider:
@@ -169,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7698141901141238597
 Transform:
   m_ObjectHideFlags: 0
